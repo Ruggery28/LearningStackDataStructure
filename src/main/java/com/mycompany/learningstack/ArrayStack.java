@@ -69,8 +69,8 @@ public class ArrayStack {
         System.out.printf("[");
         for (int i = 0; i < top + 1; i++) {
             //just a if to print the last element with the ] in the end.
-            if (i == top + 1) {
-                System.out.printf("%d ]", stackArray[i]);
+            if (i == top) {
+                System.out.println(stackArray[i] + "]");
             } else {
                 System.out.printf("%d, ", stackArray[i]);
             }
