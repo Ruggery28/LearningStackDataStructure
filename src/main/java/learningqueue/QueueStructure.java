@@ -4,6 +4,8 @@
  */
 package learningqueue;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Ruggery
@@ -23,6 +25,61 @@ public class QueueStructure {
     the best-before date (maximum of two weeks), and the time it was placed into the storage.
      */
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        CircularQueue queue = new CircularQueue(8);
+        System.out.println("=== Welcome to the Storage food ===");
+
+        while (true) {
+            try {
+                System.out.println("================== Menu ==================");
+                System.out.println("Enter 01: Add a food to the tray.");
+                System.out.println("Enter 02: Remove a food to the tray.");
+                System.out.println("Enter 03: Peek the old item from the tray.");
+                System.out.println("Enter 04: Display all the food from the tray.");
+                System.out.println("Enter 05: To exit.");
+                System.out.printf("Enter a valid option: ");
+                String option = sc.nextLine();
+
+                switch (option) {
+                    case "1": {
+                        System.out.printf("What food are you adding: ");
+                        String foodName = sc.nextLine();
+                        System.out.printf("What is its weight:[grams] ");
+                        double foodWeight = sc.nextDouble();
+                        sc.nextLine(); //clean the buffer
+                        int expiredDay = 14;
+
+                        FoodItem food = new FoodItem(foodName, foodWeight, expiredDay);
+                        queue.enqueue(food);
+                        break;
+                    }
+                    case "2": {
+                        System.out.println("Item deleted: " + queue.dequeue());
+                        break;
+                    }
+                    case "3": {
+                        System.out.println("Front item: " + queue.peek());
+                        break;
+                    }
+                    case "4": {
+                        queue.display();
+                        break;
+                    }
+                    case "5": {
+                        System.out.println("Exiting the program...");
+                        sc.close();
+                        return;
+                    }
+                    default:{
+                        System.out.println("Invalid option! Enter again!");
+                    }
+                }
+
+            } catch (IllegalStateException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
 
     }
 
